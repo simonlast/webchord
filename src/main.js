@@ -1,4 +1,2 @@
 
-var s = 'it works!';
-
-console.log(s);
+console.log(Peer);
