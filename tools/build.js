@@ -6,11 +6,25 @@ var path = require('path'),
 	watch = require('node-watch');
 
 var dir = path.join(__dirname, '/../src/');
-var main = path.join(dir, 'main.js');
+var main = path.join(dir, 'main.coffee');
 var out = path.join(__dirname, '/../public/assets/webchord.js');
+
+var coffee = require('coffee-script');
+var through = require('through');
 
 var br = browserify();
 br.add(main);
+
+br.transform(function (file) {
+    var data = '';
+    return through(write, end);
+
+    function write (buf) { data += buf }
+    function end () {
+        this.queue(coffee.compile(data));
+        this.queue(null);
+    }
+});
 
 var outStream = fs.createWriteStream(out);
 
