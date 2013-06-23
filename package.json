@@ -2,13 +2,15 @@
   "name": "webchord",
   "version": "0.0.0",
   "description": "webchord ========",
-  "main": "tools/server.js",
+  "main": "tools/server.coffee",
   "dependencies": {
     "browserify": "~2.18.1",
+    "coffee": "~0.0.1",
     "connect": "~2.7.6",
     "express": "~3.2.0",
     "node-watch": "~0.3.3",
     "peer": "~0.1.6",
+    "socket.io": "~0.9.16",
     "through": "~2.3.4"
   },
   "devDependencies": {
@@ -24,5 +26,5 @@
   "author": "",
   "license": "BSD",
   "readmeFilename": "README.md",
-  "gitHead": "9986597c6f0318ded29966660fb14aa1ec9fd13a"
+  "gitHead": "665655bba0319ebf97e29ba6092d9fa3277bf1d7"
 }
