@@ -4,5 +4,5 @@ generateID = ->
     v = (if c is "x" then r else (r & 0x3 | 0x8))
     v.toString 16
 
-exports.hash = require("./hash").hash
+exports.hash = require("./hash.coffee").hash
 exports.generateID = generateID
