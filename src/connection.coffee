@@ -1,20 +1,25 @@
 
-var id = '1';
 
-peer = new Peer('qo4iew', {host: 'localhost', port: 9000});
+class Connection
+	constructor: (id) ->
+		@peers = {}
+		@peer = new Peer(id, host: 'localhost', port: 9000);
 
-console.log(id);
+		@peer.on 'connection', (conn) =>
+			console.log conn
 
-peer.on('connection', function(conn){
-	console.log('connected to'  + conn);
-	conn.on('data', function(data){
-		console.log(data);
-	});
-});
+	#cb takes (res, err)
+	rpc: (id, method, args, cb) ->
+		if(@peers[id]?) #peer exists
+			conn = @peer.connect(id);
+			conn.on 'open', () =>
+				@peers[id] = conn
+				@send_rpc id, method, args, cb
+		else
+			@send_rpc id, method, args, cb
 
-peer.connect('1', function(conn){
-	console.log('connected to ' + conn);
-})
+	send_rpc: (id, method, args, cb) ->
+		@peers[id].send(id: id, method: method, args: args)
 
 
-exports.peer = peer;
+exports.Connection = Connection
