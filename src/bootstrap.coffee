@@ -2,8 +2,8 @@
 class Bootstrap
 	constructor: (cb) ->
 		@socket = io.connect 'localhost'
-		@socket.on 'init', (id, peers) -> 
-			cb(id, peers)
+		@socket.on 'init', (data) -> 
+			cb(data.id, data.peers)
 
 
 exports.Bootstrap = Bootstrap
